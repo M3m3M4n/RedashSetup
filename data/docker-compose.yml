@@ -1,6 +1,8 @@
 version: "2"
 x-redash-service: &redash-service
-  image: redash/redash:8.0.0.b32245
+  build:
+    context: .
+    dockerfile: Dockerfile
   depends_on:
     - postgres
     - redis
@@ -17,9 +19,6 @@ services:
   scheduler:
     <<: *redash-service
     command: scheduler
-    environment:
-      QUEUES: "celery"
-      WORKERS_COUNT: 1
   scheduled_worker:
     <<: *redash-service
     command: worker
@@ -32,6 +31,12 @@ services:
     environment:
       QUEUES: "queries"
       WORKERS_COUNT: 2
+  worker:
+    <<: *redash-service
+    command: worker
+    environment:
+      QUEUES: "periodic emails default"
+      WORKERS_COUNT: 1
   redis:
     image: redis:5.0-alpine
     restart: always
