@@ -35,6 +35,22 @@ create_directories() {
   if [ ! -e "$REDASH_BASE_PATH"/postgres-data ]; then
     mkdir "$REDASH_BASE_PATH"/postgres-data
   fi
+
+  if [ ! -e "$REDASH_BASE_PATH"/simpleSAMLphp ]; then
+    mkdir "$REDASH_BASE_PATH"/simpleSAMLphp
+  fi
+
+  if [ ! -e "$REDASH_BASE_PATH"/simpleSAMLphp/config ]; then
+    mkdir "$REDASH_BASE_PATH"/simpleSAMLphp/config
+  fi
+
+  if [ ! -e "$REDASH_BASE_PATH"/simpleSAMLphp/config/apache ]; then
+    mkdir "$REDASH_BASE_PATH"/simpleSAMLphp/config/apache
+  fi
+
+  if [ ! -e "$REDASH_BASE_PATH"/simpleSAMLphp/config/simplesamlphp ]; then
+    mkdir "$REDASH_BASE_PATH"/simpleSAMLphp/config/simplesamlphp
+  fi
 }
 
 create_config() {
@@ -69,6 +85,19 @@ setup_compose() {
   # sed -ri "s/image: redash\/redash:([A-Za-z0-9.-]*)/image: redash\/redash:$LATEST_VERSION/" docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/Dockerfile
+  cd "$REDASH_BASE_PATH/simlpleSAMLphp"
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/Dockerfile
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/authsources.php
+  cd "$REDASH_BASE_PATH/simlpleSAMLphp/config/apache"
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/apache/ports.conf.mo
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/apache/simplesamlphp.conf.mo
+  cd "$REDASH_BASE_PATH/simlpleSAMLphp/config/simplesamlphp"
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/authsources.php
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/config.php
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/saml20-sp-remote.php
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/server.crt
+  curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/server.pem
+  cd "$REDASH_BASE_PATH"
   echo "export COMPOSE_PROJECT_NAME=redash" >>~/.profile
   echo "export COMPOSE_FILE=$REDASH_BASE_PATH/docker-compose.yml" >>~/.profile
   export COMPOSE_PROJECT_NAME=redash

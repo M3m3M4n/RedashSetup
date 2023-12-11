@@ -55,3 +55,18 @@ services:
     links:
       - server:redash
     restart: always
+  simplesamlphp:
+    build:
+      context: ./simpleSAMLphp
+      args:
+        SIMPLESAMLPHP_VERSION: "1.19.8"
+    environment:
+      SIMPLESAMLPHP_SP_ENTITY_ID: http://nginx/saml/callback?org_slug=default
+      SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://nginx/saml/callback?org_slug=default
+      SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE: http://nginx/saml/callback?org_slug=default
+      SIMPLESAMLPHP_IDP_ADMIN_PASSWORD:
+      SIMPLESAMLPHP_IDP_SECRET_SALT:
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./simpleSAMLphp/authsources.php:/var/www/simplesamlphp/config/authsources.php
