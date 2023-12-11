@@ -9,7 +9,7 @@ install_docker() {
   export DEBIAN_FRONTEND=noninteractive
   sudo apt-get -qqy update
   DEBIAN_FRONTEND=noninteractive sudo -E apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-  sudo apt-get -yy install apt-transport-https ca-certificates curl software-properties-common pwgen gnupg
+  sudo apt-get -yy install apt-transport-https ca-certificates curl software-properties-common pwgen gnupg sed gawk
   sudo install -m 0755 -d /etc/apt/keyrings
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
   sudo chmod a+r /etc/apt/keyrings/docker.gpg
@@ -85,6 +85,8 @@ setup_compose() {
   # sed -ri "s/image: redash\/redash:([A-Za-z0-9.-]*)/image: redash\/redash:$LATEST_VERSION/" docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/Dockerfile
+  IP=$(hostname -I | awk '{print $1}')
+  sed -i "s/localhost/$IP/g" "$REDASH_BASE_PATH/docker-compose.yml"
   cd "$REDASH_BASE_PATH/simpleSAMLphp"
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/Dockerfile
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/authsources.php

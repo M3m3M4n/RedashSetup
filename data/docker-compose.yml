@@ -61,9 +61,9 @@ services:
       args:
         SIMPLESAMLPHP_VERSION: "1.19.8"
     environment:
-      SIMPLESAMLPHP_SP_ENTITY_ID: http://nginx/saml/callback?org_slug=default
-      SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://nginx/saml/callback?org_slug=default
-      SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE: http://nginx/saml/callback?org_slug=default
+      SIMPLESAMLPHP_SP_ENTITY_ID: http://localhost/saml/callback?org_slug=default
+      SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://localhost/saml/callback?org_slug=default
+      SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE: http://localhost/saml/callback?org_slug=default
       SIMPLESAMLPHP_IDP_ADMIN_PASSWORD:
       SIMPLESAMLPHP_IDP_SECRET_SALT:
     ports:
