@@ -85,13 +85,13 @@ setup_compose() {
   # sed -ri "s/image: redash\/redash:([A-Za-z0-9.-]*)/image: redash\/redash:$LATEST_VERSION/" docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/Dockerfile
-  cd "$REDASH_BASE_PATH/simlpleSAMLphp"
+  cd "$REDASH_BASE_PATH/simpleSAMLphp"
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/Dockerfile
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/authsources.php
-  cd "$REDASH_BASE_PATH/simlpleSAMLphp/config/apache"
+  cd "$REDASH_BASE_PATH/simpleSAMLphp/config/apache"
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/apache/ports.conf.mo
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/apache/simplesamlphp.conf.mo
-  cd "$REDASH_BASE_PATH/simlpleSAMLphp/config/simplesamlphp"
+  cd "$REDASH_BASE_PATH/simpleSAMLphp/config/simplesamlphp"
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/authsources.php
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/config.php
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/config/simplesamlphp/saml20-sp-remote.php
