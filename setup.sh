@@ -85,7 +85,11 @@ setup_compose() {
   # sed -ri "s/image: redash\/redash:([A-Za-z0-9.-]*)/image: redash\/redash:$LATEST_VERSION/" docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/docker-compose.yml
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/Dockerfile
-  IP=$(hostname -I | awk '{print $1}')
+  if [ -z "$1" ]; then
+    IP=$(hostname -I | awk '{print $1}')
+  else
+    IP=$1
+  fi
   sed -i "s/localhost/$IP/g" "$REDASH_BASE_PATH/docker-compose.yml"
   cd "$REDASH_BASE_PATH/simpleSAMLphp"
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/Dockerfile
