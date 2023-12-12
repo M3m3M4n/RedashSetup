@@ -90,6 +90,7 @@ setup_compose() {
   else
     IP=$1
   fi
+  echo "USING $IP TO ACESS REDASH, MAKE SURE CLIENT CAN CONNECT TO THIS TOO"
   sed -i "s/localhost/$IP/g" "$REDASH_BASE_PATH/docker-compose.yml"
   cd "$REDASH_BASE_PATH/simpleSAMLphp"
   curl -OL https://raw.githubusercontent.com/M3m3M4n/RedashSetup/master/data/simpleSAMLphp/Dockerfile
