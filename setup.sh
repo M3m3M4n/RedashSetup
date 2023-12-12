@@ -116,4 +116,4 @@ setup_compose() {
 install_docker
 create_directories
 create_config
-setup_compose
+setup_compose $1
